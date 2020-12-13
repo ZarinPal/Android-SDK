@@ -32,11 +32,12 @@ Add this to your root build.gradle at the end of repositories.
 **Step 2**
 
 Add the dependency:
-
+```gradle
     dependencies {
       implementation 'com.zarinpal:core:ext.zarinpalSdkVersion'
       implementation 'com.zarinpal:payment-provider:ext.zarinpalSdkVersion'
     }
+```    
     
 
 If your project and business trusted to ZarinPal, SDK ables to providing **Mobile Payment Gateway** on your App so You should add the **MPG** dependency:
