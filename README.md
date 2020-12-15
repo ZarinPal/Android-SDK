@@ -139,7 +139,7 @@ You must call `start` to begin purchase:
 Finally if your eligible to have payment process through **MPG** You should adding `usesCleartextTraffic` to application tag in your `Manifest.xml`
 ```xml
      
-          <\application
+          <application
             android:name="..."
             android:allowBackup=".."
             android:usesCleartextTraffic="true"
