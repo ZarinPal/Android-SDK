@@ -7,6 +7,8 @@ ZarinPal Purchase SDK Provides payment methods on your Android Application.
 <img src="https://github.com/ZarinPal-Lab/Android-PaymentGateway-SDK/blob/master/ezgif.com-gif-maker.gif?raw=true" alt="sample" width="200" height="400"/>
 </center>
 
+
+
   
 
 Requirements
@@ -60,8 +62,8 @@ How to use
 
 *   add Permissions in your `Manifest.xml`:
 ```xml
-     android:name=android.permission.INTERNET
-     android:name=android.permission.ACCESS_NETWORK_STATE
+   <uses-permission  android:name=android.permission.INTERNET/>
+   <uses-permission android:name=android.permission.ACCESS_NETWORK_STATE/>
 ```    
 
 **Step 2**
