@@ -169,7 +169,3 @@ Developed By
 
 The Product developed by ZarinPal Team also You can Communicate and open issue
 
-ZarinPal In App Billing - Purchase SDK | MPG
-============================================
-
-ZarinPal Purchase SDK Provides payment methods on your Android Application.
