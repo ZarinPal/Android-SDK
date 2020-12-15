@@ -25,7 +25,7 @@ Installation
 Add this to your root build.gradle at the end of repositories.
 ```gradle
     allprojects {
-      ext.zarinpalSdkVersion = 1.0.14-beta
+      ext.zarinpalSdkVersion = 0.1.20-beta
       repositories {
         ...
         maven { url 'https://dl.bintray.com/zarinpali/New-Payment-SDK' }
@@ -38,7 +38,6 @@ Add this to your root build.gradle at the end of repositories.
 Add the dependency:
 ```gradle
     dependencies {
-      implementation 'com.zarinpal:core:ext.zarinpalSdkVersion'
       implementation 'com.zarinpal:payment-provider:ext.zarinpalSdkVersion'
     }
 ```    
@@ -47,7 +46,6 @@ Add the dependency:
 If your project and business trusted to ZarinPal, SDK ables to providing **Mobile Payment Gateway** on your App so You should add the **MPG** dependency:
 ```gradle
     dependencies {
-      implementation 'com.zarinpal:core:ext.zarinpalSdkVersion'
       implementation 'com.zarinpal:payment-provider:ext.zarinpalSdkVersion'
       implementation 'com.zarinpal:mpg:ext.zarinpalSdkVersion'
     
