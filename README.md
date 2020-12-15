@@ -28,7 +28,7 @@ Add this to your root build.gradle at the end of repositories.
       ext.zarinpalSdkVersion = 0.1.20-beta
       repositories {
         ...
-        maven { url 'https://dl.bintray.com/zarinpali/New-Payment-SDK' }
+        maven { url 'https://dl.bintray.com/zarinpali/payment-sdk' }
         }
      }
 ```    
