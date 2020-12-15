@@ -3,6 +3,8 @@ ZarinPal In App Billing - Purchase SDK | MPG
 
 ZarinPal Purchase SDK Provides payment methods on your Android Application.
 
+<img src="https://github.com/ZarinPal-Lab/Android-PaymentGateway-SDK/blob/master/ezgif.com-gif-maker.gif?raw=true" alt="sample"/>
+
   
 
 Requirements
