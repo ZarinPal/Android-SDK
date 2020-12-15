@@ -5,7 +5,7 @@ ZarinPal Purchase SDK Provides payment methods on your Android Application.
 
 
 <p align="center" width="100%">
-<img src="https://github.com/ZarinPal-Lab/Android-PaymentGateway-SDK/blob/master/logo%20%E2%80%93%201.png?raw=true" alt="sample" width="200" height="70"/>
+<img src="https://github.com/ZarinPal-Lab/Android-PaymentGateway-SDK/blob/master/logo%20%E2%80%93%201.png?raw=true" alt="sample" width="300" height="100"/>
 </p>
 
 <p align="center" width="100%">
