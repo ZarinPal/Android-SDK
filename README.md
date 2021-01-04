@@ -155,6 +155,16 @@ Finally if your eligible to have payment process through **MPG** You should addi
 ```    
     
 
+Features
+========
+
+**Use Dark Mode**
+
+```kotlin
+ zarinPalPurchase.nightMode = AppCompatDelegate.MODE_NIGHT_YES
+```    
+
+
   
 
 Releases
