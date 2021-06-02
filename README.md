@@ -34,8 +34,7 @@ Add this to your root build.gradle at the end of repositories.
       ext.zarinpalSdkVersion = 0.1.22-beta
       repositories {
         ...
-        maven { url 'https://dl.bintray.com/zarinpali/payment-sdk' }
-        }
+        mavenCentral()
      }
 ```    
 
