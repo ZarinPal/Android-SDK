@@ -195,7 +195,7 @@ The ZarinPal Library stores the query results in a List of SkuPurchased objects.
 
 KTX
 ====
-a Kotlin extensions for the ZarinPak SDK for Android and Utility Library. These extensions provide Kotlin language features in `Coroutines` async method:
+a Kotlin extensions for the ZarinPal SDK for Android and Utility Library. These extensions provide Kotlin language features in `Coroutines` async method:
 
 ```gradle
     dependencies {
