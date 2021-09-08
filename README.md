@@ -1,19 +1,18 @@
 ZarinPal In App Billing - Purchase SDK | MPG
 ============================================
-
 ZarinPal Purchase SDK Provides payment methods on your Android Application.
+
+
+
+Introduction
+=============
+ZarinPal in-app purchases are the simplest solution to selling digital products or content on Android apps. So many app developers who want to sell digital goods or offer premium membership to users can simply use the it, in-app billing process for smooth and easy checkouts.
 
 
 <p align="center" width="100%">
 <img src="https://github.com/ZarinPal-Lab/Android-PaymentGateway-SDK/blob/master/logo%20%E2%80%93%201.png?raw=true" alt="sample" width="300" height="100"/>
 </p>
 
-<p align="center" width="100%">
-<img src="https://github.com/ZarinPal-Lab/Android-PaymentGateway-SDK/blob/master/ezgif.com-gif-maker.gif?raw=true" alt="sample" width="200" height="400"/>
-</p>
-
-
-  
 
 Requirements
 ============
@@ -31,7 +30,7 @@ Installation
 Add this to your root build.gradle at the end of repositories.
 ```gradle
     allprojects {
-      ext.zarinpalSdkVersion = 0.1.22-beta
+      ext.zarinpalSdkVersion = 0.3.6
       repositories {
         ...
         mavenCentral()
@@ -53,15 +52,11 @@ If your project and business trusted to ZarinPal, SDK ables to providing **Mobil
     dependencies {
       implementation 'com.zarinpal:payment-provider:ext.zarinpalSdkVersion'
       implementation 'com.zarinpal:mpg:ext.zarinpalSdkVersion'
-    
-    
     }
 ```    
 
 How to use
 ==========
-
-**Step 1**
 
 *   add Permissions in your `Manifest.xml`:
 ```xml
@@ -69,26 +64,41 @@ How to use
    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```    
 
+Initialize the billing client
+=============================
+
+**Step 1**
+
+* `ZarinPalClientBilling` provides to create the billing client instance:
+```kotlin
+        val client = ZarinPalBillingClient.newBuilder(this)
+            .enableShowInvoice()
+            .setListener(stateListener)
+            .setNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            .build()
+            
+      private val stateListener = object : BillingClientStateListener {
+            override fun onClientSetupFinished(state: ClientState) {
+                //Observing client states
+            }
+
+            override fun onClientServiceDisconnected() {
+                 Log.v("TAG_INAPP","Billing client Disconnected")
+                //When Service disconnect
+            }
+        }
+        
+```    
+
 **Step 2**
 
-*   get `ZarinPal` purchase instance:
-```kotlin
-      val zarinPalPurchase = ZarinPal.init(application)
-```    
+For start purchase you need a `Purchase` instance, `Purchase` has 3 type of Payment:
 
-*   if you'll show Invoice of SDK:
-```kotlin
-      zarinPalPurchase.enableShowInvoice = true
-```    
+*   as **Payment Request** by `asPaymentRequest()`
+*   as **Authority ID** by `asAuthority()`
+*   as **Sku ID** by `asSku()`
 
-**Step 3**
-
-For `start` purchase you need a `Request` instance, `Request` has two type of Payment:
-
-*   as **Payment Request** by `Request.asPaymentRequest()`
-*   as **Authority ID** by `Request.asAuthority()`
-
-If you would create payment Authority on Client, You must use `Request.asPayementRequest()`, this method needs below parameters:
+If you would create payment Authority on Client, You must use `asPayementRequest()`, this method needs below parameters:
 
 **Require Parameters:**
 
@@ -103,65 +113,142 @@ If you would create payment Authority on Client, You must use `Request.asPayemen
 *   Email: Valid Email Address of payer.
 
 ```kotlin
-    val request = Request.asPaymentRequest(
+    val purchase = Purchase.newBuilder()
+            .asPaymentRequest(
                 "MERCHANT_ID",
-                 1000,
-                "https://yourServer.com/callback/",
-                "A New Payment.")
+                1000,
+                "http:\\YOUR_SEVER_URL.com",
+                "1000IRR Purchase"
+            ).build()
 ```    
 
-Maybe You got `Authority` from your server, here You must use `Request.asAuthority()`
+Maybe You had `Authority`, here You must use `asAuthority()`
 ```kotlin
-    val request = Request.asAuthority("AUTHORITY")
+       val purchase = Purchase .newBuilder()
+            .asAuthority("AUTHORITY_RESOLVED")
+            .build()
 ```   
-
-**Step 4**
-
-You must call `start` to begin purchase:
+for `Sku` purchase:
 ```kotlin
-      zarinPalPurchase.start(request,object :PaymentCallback{
-                override fun onSuccess(receipt: Receipt, raw: String) {
-                    //TODO: When purchase is success .
+      val purchase = Purchase.newBuilder()
+            .asSku("SKU_ID") // SKU_ID is an Id that you've generated on ZarinPal panel.
+            .build()
+```
+
+**Step 3**
+
+You must call `purchase` method to begin flow payment:
+```kotlin
+        client.purchase(purchase, object : FutureCompletionListener<Receipt> {
+            override fun onComplete(task: TaskResult<Receipt>) {
+                if (task.isSuccess) {
+                    val receipt = task.success
+                    Log.v("ZP_RECEIPT", receipt?.transactionID)
+
+                    //here you can send receipt data to your server
+                    //sentToServer(receipt)
+                    
+                } else {
+                    task.failure?.printStackTrace()
                 }
-    
-                override fun onException(ex: Exception) {
-                   //TODO: When purchase facing exception.
-                }
-    
-                override fun onClose() {
-                   //TODO: When Close purchase.
-                }
-            })
+            }
+        })
 ```    
     
-
-  
-
-**Step 5**
+**Step 4**
 
 Finally if your eligible to have payment process through **MPG** You should adding `usesCleartextTraffic` to application tag in your `Manifest.xml`
 ```xml
      
           <application
             android:name="..."
-            android:allowBackup=".."
             android:usesCleartextTraffic="true"
-            android:icon="..."
-            android:label="...."
-            android:roundIcon="..."
-            android:supportsRtl="..."
-            android:theme="..."\>
+            ....
+            \>
 ```    
-    
+
+SKU Query
+=========
+
+The ZarinPal Library stores the query results in a List of SkuPurchased objects. You can then call `querySkuPurchased` and you appear sku purchased with inforamtion in your view and provide service.
+
+```kotlin
+   val skuQuery = SkuQueryParams.newBuilder("MERCHANT_ID")
+            .setSkuList(listOf("SKU_ID_000", "SKU_ID_001"))
+            .orderByMobile("0935******")
+            .build()
+            
+            
+    client.purchase(purchase, object : FutureCompletionListener<Receipt> {
+            override fun onComplete(task: TaskResult<Receipt>) {
+                if (task.isSuccess) {
+                    val receipt = task.success
+                    Log.v("ZP_RECEIPT", receipt?.transactionID)
+
+                    //here you can send receipt data to your server
+                    //sentToServer(receipt)
+                } else {
+                    task.failure?.printStackTrace()
+                }
+            }
+  })
+````
+
+KTX
+====
+a Kotlin extensions for the ZarinPak SDK for Android and Utility Library. These extensions provide Kotlin language features in `Coroutines` async method:
+
+```gradle
+    dependencies {
+      implementation 'com.zarinpal:payment-provider-ktx:ext.zarinpalSdkVersion'
+    }
+```    
+
+and to invoke `purchase` suspendable method in coroutine scope to start purchase flow:
+```kotlin
+     CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val receipt = client.purchase(purchase)
+                Log.v("ZP_RECEIPT", receipt.transactionID)
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
+        }
+```
+
+invoke `querySkuPurchased`suspendable method in coroutine scope to start purchase flow:
+```kotlin
+       CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val skuPurchaseList = client.querySkuPurchased(skuQuery)
+                skuPurchaseList?.forEach {
+                    Log.v("ZP_SKU_PURCHASED", "${it.authority} ${it.productId}")
+                }
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
+        }
+```
+
+
 
 Features
 ========
 
-**Use Dark Mode**
+**Dark Mode**
 
 ```kotlin
- zarinPalPurchase.nightMode = AppCompatDelegate.MODE_NIGHT_YES
+    client.setNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 ```    
+
+**Appear Invoice**
+
+```kotlin
+    client.enableShowInvoice()
+```    
+
+
+
 
 
   
