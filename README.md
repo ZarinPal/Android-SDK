@@ -30,7 +30,7 @@ Installation
 Add this to your root build.gradle at the end of repositories.
 ```gradle
     allprojects {
-      ext.zarinpalSdkVersion = 0.3.6
+      ext.zarinpalSdkVersion = (LATEST_VERSION_REALEASE) //inform of Releases: https://github.com/ZarinPal/Android-SDK/releases
       repositories {
         ...
         mavenCentral()
