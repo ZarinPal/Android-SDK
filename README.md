@@ -139,7 +139,7 @@ for `Sku` purchase:
 
 You must call `purchase` method to begin flow payment:
 ```kotlin
-        client.purchase(purchase, object : FutureCompletionListener<Receipt> {
+        client.launchBillingFlow(purchase, object : FutureCompletionListener<Receipt> {
             override fun onComplete(task: TaskResult<Receipt>) {
                 if (task.isSuccess) {
                     val receipt = task.success
@@ -179,19 +179,18 @@ The ZarinPal Library stores the query results in a List of SkuPurchased objects.
             .build()
             
             
-    client.purchase(purchase, object : FutureCompletionListener<Receipt> {
-            override fun onComplete(task: TaskResult<Receipt>) {
-                if (task.isSuccess) {
-                    val receipt = task.success
-                    Log.v("ZP_RECEIPT", receipt?.transactionID)
-
-                    //here you can send receipt data to your server
-                    //sentToServer(receipt)
-                } else {
+    client.querySkuPurchased(skuQuery, object : FutureCompletionListener<List<SkuPurchased>> {
+            override fun onComplete(task: TaskResult<List<SkuPurchased>>) {
+                if (task.isSuccess){
+                    val skuPurchaseList = task.success
+                    skuPurchaseList?.forEach {
+                        Log.v("ZP_SKU_PURCHASED", "${it.authority} ${it.productId}")
+                    }
+                }else{
                     task.failure?.printStackTrace()
                 }
             }
-  })
+        })
 ````
 
 KTX
@@ -208,7 +207,7 @@ and to invoke `purchase` suspendable method in coroutine scope to start purchase
 ```kotlin
      CoroutineScope(Dispatchers.IO).launch {
             try {
-                val receipt = client.purchase(purchase)
+                val receipt = client.launchBillingFlow(purchase)
                 Log.v("ZP_RECEIPT", receipt.transactionID)
             } catch (ex: Exception) {
                 ex.printStackTrace()
