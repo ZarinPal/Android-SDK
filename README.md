@@ -10,7 +10,7 @@ ZarinPal in-app purchases are the simplest solution to selling digital products 
 
 
 <p align="center" width="100%">
-<img src="https://github.com/ZarinPal-Lab/Android-PaymentGateway-SDK/blob/master/logo%20%E2%80%93%201.png?raw=true" alt="sample" width="300" height="100"/>
+<img src="https://raw.githubusercontent.com/ZarinPal/Android-SDK/master/logo%20%E2%80%93%201.png" alt="sample" width="300" height="100"/>
 </p>
 
 
