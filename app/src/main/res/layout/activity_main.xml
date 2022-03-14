@@ -6,13 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/btn_payment_request"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="32dp"
+        android:text="Pay as Payment Request"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btn_authority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Pay as Authority"
+        app:layout_constraintEnd_toEndOf="@+id/btn_payment_request"
+        app:layout_constraintStart_toStartOf="@+id/btn_payment_request"
+        app:layout_constraintTop_toBottomOf="@+id/btn_payment_request" />
+
+    <Button
+        android:id="@+id/btn_sku"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Pay as Sku"
+        app:layout_constraintEnd_toEndOf="@+id/btn_payment_request"
+        app:layout_constraintStart_toStartOf="@+id/btn_payment_request"
+        app:layout_constraintTop_toBottomOf="@+id/btn_authority" />
+
+    <TextView
+        android:id="@+id/txt_receipt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Result of Receipt!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sku" />
 </androidx.constraintlayout.widget.ConstraintLayout>
