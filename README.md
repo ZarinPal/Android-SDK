@@ -229,7 +229,14 @@ invoke `querySkuPurchased`suspendable method in coroutine scope to start purchas
         }
 ```
 
-
+Contract
+========
+A contract is a middlware between ZarinPal SDK and your server that provides a new payment provider as credit or digital wallet.
+```gradle
+    dependencies {
+      implementation 'com.zarinpal:contract:ext.zarinpalSdkVersion'
+    }
+```    
 
 Features
 ========
