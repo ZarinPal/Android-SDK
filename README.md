@@ -104,7 +104,7 @@ If you would create payment Authority on Client, You must use `asPayementRequest
 
 *   Merchant id: An unique ID of your business payment gateway.
 *   Amount: Amount of Purchase.
-*   Callback URL: A valid `URI` or `URL` Address for sending result purchase.
+*   Callback URL: A valid `URL` Address for sending result purchase.
 *   Description: A Content for showing payer.
 
 **Optional Parameters:**
