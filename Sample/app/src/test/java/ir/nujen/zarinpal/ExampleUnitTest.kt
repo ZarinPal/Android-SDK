@@ -1,4 +1,4 @@
-package com.zarinpal.sample.inappbilling
+package ir.nujen.zarinpal
 
 import org.junit.Test
 
