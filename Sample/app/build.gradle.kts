@@ -67,6 +67,6 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     //-----------------------------------------------------------zarinpal
-    implementation("com.zarinpal:payment-provider:0.6.2")
-    implementation("com.zarinpal:mpg:0.6.2")
+    implementation("com.zarinpal:payment-provider:0.6.3")
+    implementation("com.zarinpal:mpg:0.6.3")
 }
