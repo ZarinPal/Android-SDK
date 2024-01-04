@@ -13,8 +13,8 @@ ZarinPal in-app purchases are the simplest solution to selling digital products 
 # Requirements
 
 - Android 5.0 (API level 21) and above
-- Android Gradle Plugin 8.1.4
-- Gradle 8.0+
+- Android Gradle Plugin 3.5.1 and above(this 8.1.4)
+- Gradle 5.4.1 and above (this 8.5)
 - AndroidX (as of v11.0.0)
 
 # Installation
